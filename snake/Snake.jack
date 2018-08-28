@@ -1,0 +1,9 @@
+// The main component of snake game.
+
+/** Implementation of snake object*/
+class Snake {
+    field int x, y; //Location of the head of the snake the screen.
+    field int v;    // Velocity of the snake.
+    field Array bodies; // The pixes that represents the snake.    
+    
+}

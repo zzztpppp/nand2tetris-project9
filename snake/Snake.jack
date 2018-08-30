@@ -8,7 +8,7 @@ class Snake {
     
     field int x, y;     // Location of the head of the snake the screen.
     field int v;        // Velocity of the snake.
-    field Array body; // The pixes that represents the snake.
+    field Array body;   // The pixes that represents the snake.
     field length;       // Length of the snake.
     
     /** Construct a new instance of snake from a given
@@ -20,7 +20,8 @@ class Snake {
         let this.body = Array.new(length)
         
         while (length > 0) {
-            
+            this.body[length] = Tuple.new(x, y); 
+            x = x - Snake.volume; 
         }
     }
     

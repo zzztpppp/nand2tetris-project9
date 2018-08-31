@@ -8,26 +8,57 @@ class Snake {
     
     field int x, y;     // Location of the head of the snake the screen.
     field int v;        // Velocity of the snake.
+    field int d;        // Directon of the snake; 0 stands for right 1 for up 2 for left 3 for down.
     field Array body;   // The pixes that represents the snake.
     field length;       // Length of the snake.
     
     /** Construct a new instance of snake from a given
      *  length and the head loaction */
-    constructor Snake new(int length, int x, int y) {
-        let this.x = x;
-        let this.y = y;
-        let this.length = length;
-        let this.body = Array.new(length)
+    constructor Snake new(int l, int p_x, int p_y) {
+        let x = p_x;
+        let y = p_y;
+        let d = 0;
+        let length = l;
+        let body = Array.new(length)
         
-        while (length > 0) {
-            this.body[length] = Tuple.new(x, y); 
+        while (l > 0) {
+            body[length] = Tuple.new(x, y); 
             x = x - Snake.volume; 
+            l = l - 1;
         }
+        return this;
     }
     
     /* Draw the snake on screen */
     method void draw() {
         var int num_iter;
         let num_iter = this.length;
+        while (num_iter > 0) {
+            do HelperFuncs.draw_square(this.body[num_iter - 1], Snake.volume);
+        }
+        
+        return;
+    }
+    
+    /** Chnage the direction the snake moves toward. */
+    method void turn(int direction) {
+        var int diff;
+        let diff = d - direction;
+        if (d == direction) {return;}
+        if ( (Math.abs(d) = 1 ) | (Math.abs(d) = 3) ) {
+            let d = direction;
+        }
+        return;
+    }
+    
+    /** The snake grows if it gets a food */
+    method void grow() {
+        let length = length + 1;
+        var Array new_body;
+        let new_body = Array.new(length);
+        
+        var Tuple new_part;
+        let new_part = Tupl
+        
     }
 }

@@ -4,7 +4,6 @@
 class Snake {
      
     static int volume;  // Number of pixels that a chunk is consisted of.
-    let volume = 4; 
     
     field int x, y;     // Location of the head of the snake the screen.
     field int v;        // Velocity of the snake.
@@ -29,12 +28,19 @@ class Snake {
         return this;
     }
     
+    /** Initialize the static variables */
+    function void init() {
+        let volume = 4;
+        return;
+    }
+    
+    
     /* Draw the snake on screen */
     method void draw() {
         var int num_iter;
         let num_iter = this.length;
         while (num_iter > 0) {
-            do HelperFuncs.draw_square(this.body[num_iter - 1], Snake.volume);
+            do HelperFuncs.draw_square(this.body[num_iter - 1], volume);
         }
         
         return;
@@ -58,7 +64,7 @@ class Snake {
         let new_body = Array.new(length);
         
         var Tuple new_part;
-        let new_part = Tupl
+        let new_part = Tuple.new()
         
     }
 }

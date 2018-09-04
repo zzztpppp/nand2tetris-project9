@@ -1,0 +1,26 @@
+// Some helper functions for the snake game.
+
+class HelperFuncs {
+    
+    /** Draw a square with a specific area and upper right location.*/
+    function void draw_square(int area, Tuple location) {
+        // Side lengnth of the square.
+        var int length;
+        let length = Math.sqrt(area);
+    
+        // The bottom left corner of the square
+        var int bottom_x;
+        var int bottom_y;
+        let bottom_x = location.get_x();
+        let bottom_y = location.get_y() + length;
+        
+        // The upper left corner of the square
+        var int upper_x;
+        var int upper_y;
+        let upper_x = location.get_x() - length;
+        let upper_y = location.get_y();
+        
+        // Draw the square
+        do Screen.drawRectangle(upper_x, upper_y, bottom_x, bottom_y);
+    }
+}

@@ -4,13 +4,11 @@
 class Snake {
      
     static int volume;  // Number of pixels that a chunk is consisted of.
-    let volume = 4; 
-    
     field int x, y;     // Location of the head of the snake the screen.
     field int v;        // Velocity of the snake.
     field int d;        // Directon of the snake; 0 stands for right 1 for up 2 for left 3 for down.
     field Array body;   // The pixes that represents the snake.
-    field length;       // Length of the snake.
+    field int length;   // Length of the snake.
     
     /** Construct a new instance of snake from a given
      *  length and the head loaction */
@@ -19,12 +17,12 @@ class Snake {
         let y = p_y;
         let d = 0;
         let length = l;
-        let body = Array.new(length)
+        let body = Array.new(length);
         
         while (l > 0) {
-            body[length] = Tuple.new(x, y); 
-            x = x - Snake.volume; 
-            l = l - 1;
+            let body[length] = Tuple.new(x, y); 
+            let x = x - Snake.volume; 
+            let l = l - 1;
         }
         return this;
     }
@@ -32,7 +30,7 @@ class Snake {
     /* Draw the snake on screen */
     method void draw() {
         var int num_iter;
-        let num_iter = this.length;
+        let num_iter = length;
         while (num_iter > 0) {
             do HelperFuncs.draw_square(this.body[num_iter - 1], Snake.volume);
         }
@@ -58,7 +56,65 @@ class Snake {
         let new_body = Array.new(length);
         
         var Tuple new_part;
-        let new_part = Tupl
+        let new_part = Tuple.new(body[0].get_x() - Snake.volume, body[0].get_y());
         
+        let new_body[0] = new_part;
+        
+        var int num_iter;
+        let num_iter = length;
+        while (num_iter > 1) {
+            let new_body[num_iter - 1] = body[num_iter - 2];
+            let num_iter = num_iter - 1;
+        }
+        return;
+    }
+    
+    /** Move the snake forward a unit */
+    methdo void forward() {
+        var int num_iter;
+        let num_iter = length;
+        var Tuple new_head;
+        
+        if (direction = 0) { new_head = Tuple.new(x + 4, y);}
+        if (direction = 1) { new_head = Tuple.new(x, y - 4);}
+        if (direction = 2) { new_head = Tuple.new(x - 4, y);}
+        if (direction = 3) { new_head = Tuple.new(x, y + 4);}
+        
+        while (num_iter > 1) {
+            var int new_x;
+            var int new_y;
+            let new_x = body[num_iter - 1].get_x();
+            let new_y = body[num_iter - 1].get_y();
+            
+            var Tuple new_part = Tuple.new(new_x, new_y);
+            let body[num_iter - 2] = new_part;
+            
+            let num_iter = num_iter - 1;
+        }
+        
+        return;
+    }
+    
+    /** Initialize the static value */
+    function void init() {
+        let volume = 4;
+        return;
+    }
+    
+    /** Unit test */
+    method void main() {
+        var Snake s;
+        let s = new Snake(2, 200, 100);
+        do s.draw();
+        do s.forward();
+        do s.draw();
+        do s.forward();
+        do s.draw();
+        do s.turn(1);
+        do s.forward();
+        do s.draw();
+        do s.forward();
+        do s.draw();
+        return;
     }
 }

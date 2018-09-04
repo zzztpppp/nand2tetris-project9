@@ -1,0 +1,36 @@
+// This is a data structure for storing a 2d coordinate pair.
+
+
+class Tuple {
+    
+    field int x;
+    field int y;
+    
+    constructor Tuple new(int a, int b) {
+        let x = a;
+        let y = b;
+        
+        return this;
+    }
+    
+    /** Get the x value of the coordinate */
+    method int get_x() {
+        return x;
+    }
+    
+    /** Get the y value of the coordinate */
+    method int get_y() {
+        return y;
+    }
+    
+    /** Unit test */
+    function void main() {
+        var Tuple t;
+        let t = Tuple.new(3, 4);
+        
+        do Output.printint(t.get_x());
+        do Output.printint(t.get_y());
+        
+        return;
+    }
+}

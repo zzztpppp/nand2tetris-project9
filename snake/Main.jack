@@ -1,0 +1,14 @@
+// Main programme of the snake game.
+
+
+class Main {
+    //function void main() {
+    //    do Tuple.main();
+    //    return;
+    //}
+    function void main(){
+        do Test.init();
+        do Test.main();
+        return;
+    }
+}

@@ -3,12 +3,14 @@
 /** Implementation of snake object*/
 class Snake {
      
-    static int volume;  // Number of pixels that a chunk is consisted of.
     field int x, y;     // Location of the head of the snake the screen.
     field int v;        // Velocity of the snake.
     field int d;        // Directon of the snake; 0 stands for right 1 for up 2 for left 3 for down.
     field Array body;   // The pixes that represents the snake.
     field int length;   // Length of the snake.
+    field int direction;
+    
+    static int volume;  // Number of pixels that a chunk is consisted of.
     
     /** Construct a new instance of snake from a given
      *  length and the head loaction */
@@ -21,18 +23,25 @@ class Snake {
         
         while (l > 0) {
             let body[length] = Tuple.new(x, y); 
-            let x = x - Snake.volume; 
+            let x = x - volume; 
             let l = l - 1;
         }
         return this;
     }
+    
+    /** Initialize the static variables */
+    function void init() {
+        let volume = 4;
+        return;
+    }
+    
     
     /* Draw the snake on screen */
     method void draw() {
         var int num_iter;
         let num_iter = length;
         while (num_iter > 0) {
-            do HelperFuncs.draw_square(this.body[num_iter - 1], Snake.volume);
+            do HelperFuncs.draw_square(body[num_iter - 1], volume);
         }
         
         return;
@@ -42,7 +51,7 @@ class Snake {
     method void turn(int direction) {
         var int diff;
         let diff = d - direction;
-        if (d == direction) {return;}
+        if (d = direction) {return;}
         if ( (Math.abs(d) = 1 ) | (Math.abs(d) = 3) ) {
             let d = direction;
         }
@@ -51,16 +60,19 @@ class Snake {
     
     /** The snake grows if it gets a food */
     method void grow() {
-        let length = length + 1;
+    
         var Array new_body;
-        let new_body = Array.new(length);
-        
         var Tuple new_part;
-        let new_part = Tuple.new(body[0].get_x() - Snake.volume, body[0].get_y());
+        var int num_iter;
+        var Tuple part;
         
+        let part = body[0];
+        let length = length + 1;
+        let new_body = Array.new(length);
+        let new_part = Tuple.new((part.get_x() - volume), part.get_y());
         let new_body[0] = new_part;
         
-        var int num_iter;
+        
         let num_iter = length;
         while (num_iter > 1) {
             let new_body[num_iter - 1] = body[num_iter - 2];
@@ -70,41 +82,39 @@ class Snake {
     }
     
     /** Move the snake forward a unit */
-    methdo void forward() {
+    method void forward() {
+    
         var int num_iter;
-        let num_iter = length;
+        var int new_x;
+        var int new_y;
+        var Tuple new_part;
         var Tuple new_head;
         
-        if (direction = 0) { new_head = Tuple.new(x + 4, y);}
-        if (direction = 1) { new_head = Tuple.new(x, y - 4);}
-        if (direction = 2) { new_head = Tuple.new(x - 4, y);}
-        if (direction = 3) { new_head = Tuple.new(x, y + 4);}
+        let num_iter = length;
+          
+        if(d = 0) { let new_head = Tuple.new(x + 4, y);}
+        if(d = 1) { let new_head = Tuple.new(x, y - 4);}
+        if(d = 2) { let new_head = Tuple.new(x - 4, y);}
+        if(d = 3) { let new_head = Tuple.new(x, y + 4);}
         
-        while (num_iter > 1) {
-            var int new_x;
-            var int new_y;
-            let new_x = body[num_iter - 1].get_x();
-            let new_y = body[num_iter - 1].get_y();
+        while(num_iter > 1) {
+            var Tuple part;
             
-            var Tuple new_part = Tuple.new(new_x, new_y);
+            let part = body[num_iter - 1];
+            let new_x = part.get_x();
+            let new_y = part.get_y();
+            let new_part = Tuple.new(new_x, new_y);
             let body[num_iter - 2] = new_part;
-            
             let num_iter = num_iter - 1;
         }
         
         return;
     }
-    
-    /** Initialize the static value */
-    function void init() {
-        let volume = 4;
-        return;
-    }
-    
+        
     /** Unit test */
-    method void main() {
+    function void main() {
         var Snake s;
-        let s = new Snake(2, 200, 100);
+        let s = Snake.new(2, 200, 100);
         do s.draw();
         do s.forward();
         do s.draw();

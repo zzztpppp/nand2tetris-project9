@@ -89,6 +89,7 @@ class Snake {
         var int new_y;
         var Tuple new_part;
         var Tuple new_head;
+        var Tuple part;
         
         let num_iter = length;
           
@@ -98,7 +99,6 @@ class Snake {
         if(d = 3) { let new_head = Tuple.new(x, y + 4);}
         
         while(num_iter > 1) {
-            var Tuple part;
             
             let part = body[num_iter - 1];
             let new_x = part.get_x();

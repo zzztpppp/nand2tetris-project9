@@ -10,8 +10,10 @@ class HelperFuncs {
         var int bottom_y;
         var int upper_x;
         var int upper_y;
+        
+        do location.print();
         let length = Math.sqrt(area);
-    
+        
         // The bottom left corner of the square
         
         let bottom_x = location.get_x();
@@ -25,6 +27,14 @@ class HelperFuncs {
         // Draw the square
         do Screen.drawRectangle(upper_x, upper_y, bottom_x, bottom_y);
         
+        return;
+    }
+    
+    // Unit test
+    function void main() {
+        var Tuple t; 
+        let t = Tuple.new(10, 20);
+        do HelperFuncs.draw_square(72, t);
         return;
     }
 }

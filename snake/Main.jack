@@ -2,13 +2,10 @@
 
 
 class Main {
-    //function void main() {
-    //    do Tuple.main();
-    //    return;
-    //}
-    function void main(){
-        do Test.init();
-        do Test.main();
+    function void main() {
+        //do Snake.init();
+        //do Snake.main();
+        do HelperFuncs.main();
         return;
     }
 }

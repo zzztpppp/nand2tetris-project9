@@ -15,6 +15,7 @@ class Snake {
     /** Construct a new instance of snake from a given
      *  length and the head loaction */
     constructor Snake new(int l, int p_x, int p_y) {
+        var Tuple temp;
         let x = p_x;
         let y = p_y;
         let d = 0;
@@ -22,8 +23,10 @@ class Snake {
         let body = Array.new(length);
         
         while (l > 0) {
-            let body[length] = Tuple.new(x, y); 
-            let x = x - volume; 
+            let body[length] = Tuple.new(p_x, p_y);
+            let temp = body[length];
+            do temp.print();
+            let p_x = p_x - volume; 
             let l = l - 1;
         }
         return this;
@@ -41,7 +44,7 @@ class Snake {
         var int num_iter;
         let num_iter = length;
         while (num_iter > 0) {
-            do HelperFuncs.draw_square(body[num_iter - 1], volume);
+            do HelperFuncs.draw_square(volume, body[num_iter - 1]);
         }
         
         return;
@@ -114,17 +117,18 @@ class Snake {
     /** Unit test */
     function void main() {
         var Snake s;
+        do Snake.init();
         let s = Snake.new(2, 200, 100);
-        do s.draw();
-        do s.forward();
-        do s.draw();
-        do s.forward();
-        do s.draw();
-        do s.turn(1);
-        do s.forward();
-        do s.draw();
-        do s.forward();
-        do s.draw();
+        //do s.draw();
+        //do s.forward();
+        //do s.draw();
+        //do s.forward();
+        //do s.draw();
+        //do s.turn(1);
+        //do s.forward();
+        //do s.draw();
+        //do s.forward();
+        //do s.draw();
         return;
     }
 }

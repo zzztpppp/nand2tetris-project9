@@ -23,13 +23,24 @@ class Tuple {
         return y;
     }
     
+    /*Print the tuple*/
+    method void print() {
+        do Output.printChar(40);
+        do Output.printInt(get_x());
+        do Output.printChar(44);
+        do Output.printChar(32);
+        do Output.printInt(get_y());
+        do Output.printChar(41);
+        return;
+    }
+    
     /** Unit test */
     function void main() {
         var Tuple t;
         let t = Tuple.new(3, 4);
         
-        do Output.printint(t.get_x());
-        do Output.printint(t.get_y());
+        do Output.printInt(t.get_x());
+        do Output.printInt(t.get_y());
         
         return;
     }

@@ -23,10 +23,10 @@ class Snake {
         let body = Array.new(length);
         
         while (l > 0) {
-            let body[length] = Tuple.new(p_x, p_y);
-            let temp = body[length];
-            do temp.print();
-            let p_x = p_x - volume; 
+            let body[l - 1] = Tuple.new(p_x, p_y);
+            let temp = body[l-1];
+            // do temp.print();
+            let p_x = p_x - Math.sqrt(volume); 
             let l = l - 1;
         }
         return this;
@@ -34,7 +34,7 @@ class Snake {
     
     /** Initialize the static variables */
     function void init() {
-        let volume = 4;
+        let volume = 36;
         return;
     }
     
@@ -43,8 +43,10 @@ class Snake {
     method void draw() {
         var int num_iter;
         let num_iter = length;
+        do Screen.clearScreen();
         while (num_iter > 0) {
             do HelperFuncs.draw_square(volume, body[num_iter - 1]);
+            let num_iter = num_iter - 1;
         }
         
         return;
@@ -72,7 +74,7 @@ class Snake {
         let part = body[0];
         let length = length + 1;
         let new_body = Array.new(length);
-        let new_part = Tuple.new((part.get_x() - volume), part.get_y());
+        let new_part = Tuple.new((part.get_x() - Math.sqrt(volume)), part.get_y());
         let new_body[0] = new_part;
         
         
@@ -88,28 +90,24 @@ class Snake {
     method void forward() {
     
         var int num_iter;
-        var int new_x;
-        var int new_y;
         var Tuple new_part;
         var Tuple new_head;
         var Tuple part;
         
-        let num_iter = length;
+        let num_iter = 0;
           
-        if(d = 0) { let new_head = Tuple.new(x + 4, y);}
-        if(d = 1) { let new_head = Tuple.new(x, y - 4);}
-        if(d = 2) { let new_head = Tuple.new(x - 4, y);}
-        if(d = 3) { let new_head = Tuple.new(x, y + 4);}
+        if(d = 0) { let new_head = Tuple.new(x + Math.sqrt(volume), y);}
+        if(d = 1) { let new_head = Tuple.new(x, y - Math.sqrt(volume));}
+        if(d = 2) { let new_head = Tuple.new(x - Math.sqrt(volume), y);}
+        if(d = 3) { let new_head = Tuple.new(x, y + Math.sqrt(volume));}
         
-        while(num_iter > 1) {
+        while(num_iter < length - 1) {
             
-            let part = body[num_iter - 1];
-            let new_x = part.get_x();
-            let new_y = part.get_y();
-            let new_part = Tuple.new(new_x, new_y);
-            let body[num_iter - 2] = new_part;
-            let num_iter = num_iter - 1;
+            let part = body[num_iter + 1];
+            let body[num_iter] = part;
+            let num_iter = num_iter + 1;
         }
+        let body[length - 1] = new_head;
         
         return;
     }
@@ -119,16 +117,20 @@ class Snake {
         var Snake s;
         do Snake.init();
         let s = Snake.new(2, 200, 100);
-        //do s.draw();
-        //do s.forward();
-        //do s.draw();
-        //do s.forward();
-        //do s.draw();
-        //do s.turn(1);
-        //do s.forward();
-        //do s.draw();
-        //do s.forward();
-        //do s.draw();
+        do s.draw();
+        do Sys.wait(1000);
+        do s.forward();
+        do s.draw();
+        do Sys.wait(1000);
+        do s.forward();
+        do s.draw();
+        do Sys.wait(1000);
+        do s.turn(1);
+        do s.forward();
+        do s.draw();
+        do Sys.wait(1000);
+        do s.forward();
+        do s.draw();
         return;
     }
 }

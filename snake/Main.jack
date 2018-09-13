@@ -3,9 +3,9 @@
 
 class Main {
     function void main() {
-        //do Snake.init();
-        //do Snake.main();
-        do HelperFuncs.main();
+        do Snake.init();
+        do Snake.main();
+        // do HelperFuncs.main();
         return;
     }
 }

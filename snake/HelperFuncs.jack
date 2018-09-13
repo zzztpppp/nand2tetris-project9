@@ -11,7 +11,7 @@ class HelperFuncs {
         var int upper_x;
         var int upper_y;
         
-        do location.print();
+        // do location.print();
         let length = Math.sqrt(area);
         
         // The bottom left corner of the square

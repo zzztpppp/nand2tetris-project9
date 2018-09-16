@@ -52,12 +52,12 @@ class Snake {
         return;
     }
     
-    /** Chnage the direction the snake moves toward. */
+    /** Turning the direction the snake  */
     method void turn(int direction) {
         var int diff;
         let diff = d - direction;
         if (d = direction) {return;}
-        if ( (Math.abs(d) = 1 ) | (Math.abs(d) = 3) ) {
+        if ( (Math.abs(diff) = 1 ) | (Math.abs(diff) = 3) ) {
             let d = direction;
         }
         return;
@@ -83,6 +83,7 @@ class Snake {
             let new_body[num_iter - 1] = body[num_iter - 2];
             let num_iter = num_iter - 1;
         }
+        let body = new_body;
         return;
     }
     
@@ -90,20 +91,21 @@ class Snake {
     method void forward() {
     
         var int num_iter;
-        var Tuple new_part;
         var Tuple new_head;
         var Tuple part;
         
         let num_iter = 0;
-          
-        if(d = 0) { let new_head = Tuple.new(x + Math.sqrt(volume), y);}
-        if(d = 1) { let new_head = Tuple.new(x, y - Math.sqrt(volume));}
-        if(d = 2) { let new_head = Tuple.new(x - Math.sqrt(volume), y);}
-        if(d = 3) { let new_head = Tuple.new(x, y + Math.sqrt(volume));}
+        do Output.printInt(d);
         
-        while(num_iter < length - 1) {
-            
+        // Update the snake's position and its new head.
+        if(d = 0) { let new_head = Tuple.new(x + Math.sqrt(volume), y); let x = x + Math.sqrt(volume);}
+        if(d = 1) { let new_head = Tuple.new(x, y - Math.sqrt(volume)); let y = y - Math.sqrt(volume);}
+        if(d = 2) { let new_head = Tuple.new(x - Math.sqrt(volume), y); let x = x - Math.sqrt(volume);}
+        if(d = 3) { let new_head = Tuple.new(x, y + Math.sqrt(volume)); let y = y + Math.sqrt(volume);}
+        
+        while(num_iter < (length - 1)) {        
             let part = body[num_iter + 1];
+            // do part.print();
             let body[num_iter] = part;
             let num_iter = num_iter + 1;
         }
@@ -115,22 +117,21 @@ class Snake {
     /** Unit test */
     function void main() {
         var Snake s;
+        var char key;
         do Snake.init();
-        let s = Snake.new(2, 200, 100);
-        do s.draw();
-        do Sys.wait(1000);
-        do s.forward();
-        do s.draw();
-        do Sys.wait(1000);
-        do s.forward();
-        do s.draw();
-        do Sys.wait(1000);
-        do s.turn(1);
-        do s.forward();
-        do s.draw();
-        do Sys.wait(1000);
-        do s.forward();
-        do s.draw();
+        let s = Snake.new(10, 200, 100);
+        while(true) {
+            let key = Keyboard.keyPressed();
+            do Sys.wait(600);
+            do s.forward();
+            do s.draw();
+            //do s.grow();
+            //do s.draw();
+            if (key = 130) {do s.turn(2);}
+            if (key = 131) {do s.turn(1);}
+            if (key = 132) {do s.turn(0);}
+            if (key = 133) {do s.turn(3);}
+        }
         return;
     }
 }

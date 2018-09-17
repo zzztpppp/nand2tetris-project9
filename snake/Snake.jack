@@ -93,9 +93,11 @@ class Snake {
         var int num_iter;
         var Tuple new_head;
         var Tuple part;
+        var Tuple old_part;
         
         let num_iter = 0;
-        do Output.printInt(d);
+        let old_part = body[0];
+        do old_part.dispose();
         
         // Update the snake's position and its new head.
         if(d = 0) { let new_head = Tuple.new(x + Math.sqrt(volume), y); let x = x + Math.sqrt(volume);}
@@ -103,7 +105,7 @@ class Snake {
         if(d = 2) { let new_head = Tuple.new(x - Math.sqrt(volume), y); let x = x - Math.sqrt(volume);}
         if(d = 3) { let new_head = Tuple.new(x, y + Math.sqrt(volume)); let y = y + Math.sqrt(volume);}
         
-        while(num_iter < (length - 1)) {        
+        while(num_iter < (length - 1)) {            
             let part = body[num_iter + 1];
             // do part.print();
             let body[num_iter] = part;
@@ -113,18 +115,42 @@ class Snake {
         
         return;
     }
+    
+    /* Return the position of the tuple */
+    method Tuple report_pos() {
+        var Tuple pos;
+        let pos = Tuple.new(x, y);
+        return pos;
+    }
+    
+    /** Delete the snake */
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+    
         
     /** Unit test */
     function void main() {
         var Snake s;
         var char key;
+        var int wait;
         do Snake.init();
         let s = Snake.new(10, 200, 100);
         while(true) {
-            let key = Keyboard.keyPressed();
-            do Sys.wait(600);
-            do s.forward();
-            do s.draw();
+            let key = 0;
+            while (key = 0) {
+                let key = Keyboard.keyPressed();
+                do s.forward();
+                let key = Keyboard.keyPressed();
+                do s.draw();
+                let key = Keyboard.keyPressed();
+                let wait = 0;
+                while (wait < 5000) {
+                    let key = Keyboard.keyPressed();
+                    let wait = wait + 1;
+                }
+          }
             //do s.grow();
             //do s.draw();
             if (key = 130) {do s.turn(2);}

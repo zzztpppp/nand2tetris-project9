@@ -34,6 +34,12 @@ class Tuple {
         return;
     }
     
+    /** Delete this tuple */
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+    
     /** Unit test */
     function void main() {
         var Tuple t;

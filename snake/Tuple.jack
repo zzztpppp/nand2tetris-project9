@@ -23,6 +23,11 @@ class Tuple {
         return y;
     }
     
+    /** Get the length of the snake */
+    method int get_length() {
+        return length;
+    }
+    
     /*Print the tuple*/
     method void print() {
         do Output.printChar(40);
@@ -32,6 +37,14 @@ class Tuple {
         do Output.printInt(get_y());
         do Output.printChar(41);
         return;
+    }
+    
+    /** Check if this tuple equals the other one */
+    method boolean equals(Tuple that) {
+        if ((get_x() = that.get_x()) & (get_y() = that.get_y())){
+            return true;
+        }
+        return false;
     }
     
     /** Delete this tuple */

@@ -11,4 +11,28 @@ class SnakeGame {
         let food_pos = Tuple.new(200, 150);
         return this;
     }
+    
+    /** Check if the snake get the food */
+    method boolean if_grow() {
+        var Tuple snake_pos;
+        let snake_pos = snake.report_pos();
+        if ((snake_pos.get_x() = food_pos.get_x()) & (snake_pos.get_y() = food_pos.get_y())) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /** Check if the snake hit the wall or itself */
+    method boolean if_hit() {
+        var Tuple snake_pos;
+        var snake_length;
+        var num_iter;
+        
+        let snake_pos = snake.report_pos();
+        if ((snake_pos.get_x() < 0) | (snake_pos.get_x() > 511)) {return true;}
+        if ((snake_pos.get_y() < 0) | (snake_pos.get_y() > 255)) {return true;}
+        if (snake.tangled()) {return true;}
+        return false;
+    }
 }

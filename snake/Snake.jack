@@ -116,11 +116,16 @@ class Snake {
         return;
     }
     
-    /* Return the position of the tuple */
+    /* Return the position of the snake */
     method Tuple report_pos() {
         var Tuple pos;
         let pos = Tuple.new(x, y);
         return pos;
+    }
+    
+    /** Return the length of the snake */
+    method int report_length() {
+        return length;
     }
     
     /** Delete the snake */

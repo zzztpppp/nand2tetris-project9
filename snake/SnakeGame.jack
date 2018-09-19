@@ -35,4 +35,9 @@ class SnakeGame {
         if (snake.tangled()) {return true;}
         return false;
     }
+    
+    /** Randomly generate a food on canvas */
+    method void feed() {
+        
+    }
 }

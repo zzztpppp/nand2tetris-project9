@@ -38,6 +38,11 @@ class Snake {
         return;
     }
     
+    /** Return the volume of a section of snake */
+    function int get_volume() {
+        return volume;
+    }
+    
     
     /* Draw the snake on screen */
     method void draw() {
@@ -127,6 +132,19 @@ class Snake {
     method int report_length() {
         return length;
     }
+    
+    /** Check if the snake hit itself */
+    method boolean tangled() {
+        var int num_iter;
+        var Tuple head_pos;
+        let head_pos = body[0];
+        let num_iter = 0;
+        while (num_iter < length - 1) {
+            if (head_pos.equals(body[num_iter])) {return true;}
+            num_iter = num_iter + 1;
+        }
+        return false;
+   }
     
     /** Delete the snake */
     method void dispose() {

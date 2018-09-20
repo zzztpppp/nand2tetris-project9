@@ -26,8 +26,8 @@ class SnakeGame {
     /** Check if the snake hit the wall or itself */
     method boolean if_hit() {
         var Tuple snake_pos;
-        var snake_length;
-        var num_iter;
+        var int snake_length;
+        var int num_iter;
         
         let snake_pos = snake.report_pos();
         if ((snake_pos.get_x() < 0) | (snake_pos.get_x() > 511)) {return true;}
@@ -38,6 +38,54 @@ class SnakeGame {
     
     /** Randomly generate a food on canvas */
     method void feed() {
+        var Tuple snake_head;
+        let snake_head = snake.report_pos();
         
+        if (snake_head.equals(food_pos)) {
+            do snake.grow();
+            return;
+        }
+        return;
+    }
+    
+    /** Dispose the game object */
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+    
+    /** Main game function **/
+    method void run() {
+        var Snake s;
+        var char key;
+        var int wait;
+        
+        do Snake.init();
+        let s = Snake.new(2, 200, 100);
+        while(true) {
+            let key = 0;
+            while (key = 0) {
+                let key = Keyboard.keyPressed();
+                do s.forward();
+                let key = Keyboard.keyPressed();
+                do s.draw();
+                do HelperFuncs.draw_square(Snake.get_volume(), food_pos);
+                if (~if_grow()) {do s.grow();}
+                if (if_hit()) {return;}
+                let key = Keyboard.keyPressed();
+                let wait = 0;
+                while (wait < 8000) {
+                    let key = Keyboard.keyPressed();
+                    let wait = wait + 1;
+                }
+          }
+            //do s.grow();
+            //do s.draw();
+            if (key = 130) {do s.turn(2);}
+            if (key = 131) {do s.turn(1);}
+            if (key = 132) {do s.turn(0);}
+            if (key = 133) {do s.turn(3);}
+        }
+        return;
     }
 }

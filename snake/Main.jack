@@ -3,9 +3,15 @@
 
 class Main {
     function void main() {
-        do Snake.init();
-        do Snake.main();
+        // do Snake.init();
+        // do Snake.main();
         // do HelperFuncs.main();
+        // do LCGRandom.setSeed(8);
+        // do Output.printInt(LCGRandom.randRange(1, 10));
+        var SnakeGame g;
+        let g = SnakeGame.new();
+        do g.run();
+        do g.dispose();
         return;
     }
 }

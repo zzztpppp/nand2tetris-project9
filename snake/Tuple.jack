@@ -23,10 +23,6 @@ class Tuple {
         return y;
     }
     
-    /** Get the length of the snake */
-    method int get_length() {
-        return length;
-    }
     
     /*Print the tuple*/
     method void print() {

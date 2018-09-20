@@ -141,7 +141,7 @@ class Snake {
         let num_iter = 0;
         while (num_iter < length - 1) {
             if (head_pos.equals(body[num_iter])) {return true;}
-            num_iter = num_iter + 1;
+            let num_iter = num_iter + 1;
         }
         return false;
    }

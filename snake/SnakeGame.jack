@@ -6,9 +6,10 @@ class SnakeGame {
     field Tuple food_pos;
     
     constructor SnakeGame new() {
-        let snake = Snake.new(2, 200, 100);
+        do Snake.init();
+        let snake = Snake.new(2, 64, 64);
         let score = 0;
-        let food_pos = Tuple.new(200, 150);
+        let food_pos = Tuple.new(64, 128);
         return this;
     }
     
@@ -38,13 +39,13 @@ class SnakeGame {
     
     /** Randomly generate a food on canvas */
     method void feed() {
-        var Tuple snake_head;
-        let snake_head = snake.report_pos();
+        var Tuple new_food;
+        var int x, y;
         
-        if (snake_head.equals(food_pos)) {
-            do snake.grow();
-            return;
-        }
+        let x = LCGRandom.randRange(1, 512 / Math.sqrt(Snake.get_volume())) * Math.sqrt(Snake.get_volume());
+        let y = LCGRandom.randRange(0, 256 / (Math.sqrt(Snake.get_volume())) - 1) * Math.sqrt(Snake.get_volume());
+        let new_food = Tuple.new(x, y);
+        let food_pos = new_food;
         return;
     }
     
@@ -56,21 +57,24 @@ class SnakeGame {
     
     /** Main game function **/
     method void run() {
-        var Snake s;
         var char key;
         var int wait;
         
-        do Snake.init();
-        let s = Snake.new(2, 200, 100);
+        while (true)
+        
         while(true) {
             let key = 0;
             while (key = 0) {
                 let key = Keyboard.keyPressed();
-                do s.forward();
+                do snake.forward();
                 let key = Keyboard.keyPressed();
-                do s.draw();
+                do snake.draw();
                 do HelperFuncs.draw_square(Snake.get_volume(), food_pos);
-                if (~if_grow()) {do s.grow();}
+                if (if_grow()) {
+                    do snake.grow();
+                    do feed();
+                    
+                }
                 if (if_hit()) {return;}
                 let key = Keyboard.keyPressed();
                 let wait = 0;
@@ -81,10 +85,10 @@ class SnakeGame {
           }
             //do s.grow();
             //do s.draw();
-            if (key = 130) {do s.turn(2);}
-            if (key = 131) {do s.turn(1);}
-            if (key = 132) {do s.turn(0);}
-            if (key = 133) {do s.turn(3);}
+            if (key = 130) {do snake.turn(2);}
+            if (key = 131) {do snake.turn(1);}
+            if (key = 132) {do snake.turn(0);}
+            if (key = 133) {do snake.turn(3);}
         }
         return;
     }

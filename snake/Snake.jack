@@ -34,7 +34,7 @@ class Snake {
     
     /** Initialize the static variables */
     function void init() {
-        let volume = 36;
+        let volume = 64;
         return;
     }
     

@@ -3,12 +3,12 @@
 
 class Main {
     function void main() {
-        // do Snake.init();
-        // do Snake.main();
-        // do HelperFuncs.main();
-        // do LCGRandom.setSeed(8);
-        // do Output.printInt(LCGRandom.randRange(1, 10));
+        // Initialization
         var SnakeGame g;
+        do Snake.init();
+        do LCGRandom.setSeed(10);
+        
+        
         let g = SnakeGame.new();
         do g.run();
         do g.dispose();
